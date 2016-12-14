@@ -1,208 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Home Square - Responsive RealEstate template</title>
-	<meta name="description" content="Home Square is a responsive realestate template."><!-- Add your Company short description -->
-    <meta name="keywords" content="Responsive,HTML5,CSS3,XML,JavaScript"><!-- Add some Keywords based on your Company and your business and separate them by comma -->
-    <meta name="author" content="Joseph a, QodeArk@gmail.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=no">
-
-    <link href="https://fonts.googleapis.com/css?family=Scada:400,700|Open+Sans:400,300,700" rel="stylesheet" type="text/css">
-    <link id="main-style-file-css" rel="stylesheet" href="assets/css/style.css"/>
-
-</head>
-<body class="home-page-2">
-	<header id="main-header">
-        <div id="header-top">
-            <div class="header-top-content container">
-                <!-- Language Switcher -->
-                <ul id="language-switcher" class="list-inline">
-                    <li><a href="#">En</a></li>
-                    <li><a href="#">Fr</a></li>
-                    <li><a href="#">De</a></li>
-                </ul>
-                <!-- End of Language Switcher -->
-
-                <!-- Login Links -->
-                <ul id="login-boxes" class="list-inline">
-                    <li><a id="login-form-butt" href="forms/login.html">Login</a></li>
-                    <li><a id="register-form-butt" href="forms/register.html">Register</a></li>
-                </ul>
-                <!-- End of Login Links -->
-            </div>
-        </div>
-        <div class="main-header-cont container">
-            <!-- Top Logo -->
-            <div class="logo-main-box col-xs-6 col-sm-4 col-md-3">
-                <span class="bold">Home</span>
-                <span> S</span>
-                <div class="logo"></div>
-                <span>uare</span>
-            </div>
-            <!-- End of Top Logo -->
-            <!-- Main Menu -->
-            <div class="menu-container col-xs-6 col-sm-8 col-md-9">
-                <!-- Main Menu -->
-                <nav id="main-menu" class="hidden-xs hidden-sm">
-                    <ul class="main-menu list-inline">
-                        <li><span class="current">Home</span>
-                            <ul>
-                                <li><a href="index.html">Home - Map</a></li>
-                                <li><a href="index-slider.html">Home - Slider</a></li>
-                                <li><a href="index-slider-1.html" class="current">Home - Slider V2</a></li>
-                                <li><a href="index-map.html">Home - Map Only</a></li>
-                                <li><a href="index-slider-fullscreen.html">Home - Fullscreen Slider</a></li>
-                            </ul>
-                        </li><!-- Menu items ( You can change the link and its text ) -->
-                        <li><span>Property Listings</span><!-- Menu items with submenu ("has-sub-menu" class is the helper for your future uses) -->
-                            <ul>
-                                <li><a href="pages/property-listing-grid.html">Property Listings - Grid</a></li>
-                                <li><a href="pages/property-listing-sidebar.html">Property Listings - Grid &amp; Sidebar</a></li>
-                                <li><a href="pages/property-listing-rows.html">Property Listings - Rows</a></li>
-                                <li><a href="pages/property-listing-map.html">Property Listings - Map</a></li>
-                                <li><a href="pages/property-details.html">Property Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="pages/compare.html">Property Compare</a></li>
-                        <li><span>Agents</span>
-                            <ul>
-                                <li><a href="pages/agents.html">Agents Listing</a></li>
-                                <li><a href="pages/agent-details.html">Agent Details</a></li>
-                            </ul>
-                        </li>
-                        <li><span>Gallery</span>
-                            <ul>
-                                <li><a href="pages/gallery-two-cols.html">Gallery - 2 Columns</a></li>
-                                <li><a href="pages/gallery-three-cols.html">Gallery - 3 Columns</a></li>
-                                <li><a href="pages/gallery-four-cols.html">Gallery - 4 Columns</a></li>
-                            </ul>
-                        </li>
-                        <li><span>Blog</span>
-                            <ul>
-                                <li><a href="pages/blog.html">Blog - Right Sidebar</a></li>
-                                <li><a href="pages/blog-left-sidebar.html">Blog - Left Sidebar</a></li>
-                                <li><a href="pages/blog-details.html">Single Post</a></li>
-                            </ul>
-                        </li>
-                        <li><span>Pages</span>
-                            <ul>
-                                <li><a href="pages/testimonials.html">Testimonials</a></li>
-                                <li><a href="pages/services.html">Services</a></li>
-                                <li><a href="pages/video-tour.html">Video Tour</a></li>
-                                <li><a href="pages/faq.html">FAQ</a></li>
-                                <li><a href="pages/404.html">404</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="pages/contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-                <!-- END of Main Menu -->
-
-                <div id="main-menu-handle" class="hidden-md hidden-lg"><i class="fa fa-bars"></i></div><!-- Mobile Menu handle -->
-                <a id="submit-property-link" class="btn" href="pages/submit-property.html"><span>Submit Your Property</span></a>
-            </div>
-            <!-- End of Main Menu -->
-        </div>
-        <div id="mobile-menu-container" class="hidden-md hidden-lg"></div>
-    </header>
-
-	<!-- Main Slider -->
-	<section id="main-slider">
-		<div class="items">
-			<div class="img-container" data-bg-img="assets/img/slider/1.jpg"></div><!-- Change the URL section based on your image\'s name -->
-			<div class="slide-caption">
-				<div class="inner-container clearfix">
-					<div class="first-sec">Luxury House</div>
-					<div class="sec-sec">in Los Angles</div>
-				</div>
-			</div>
-		</div>
-		<div class="items">
-			<div class="img-container" data-bg-img="assets/img/slider/2.jpg"></div>
-			<div class="slide-caption">
-				<div class="inner-container clearfix">
-					<div class="first-sec">Vacation Rental</div>
-					<div class="sec-sec">in Las Vegas</div>
-				</div>
-			</div>
-		</div>
-		<div class="items">
-			<div class="img-container" data-bg-img="assets/img/slider/3.jpg"></div>
-			<div class="slide-caption">
-				<div class="inner-container clearfix">
-					<div class="first-sec">Luxury Apartment</div>
-					<div class="sec-sec">in Beverly Hills</div>
-				</div>
-			</div>
-		</div>
-		<div class="items">
-			<div class="img-container" data-bg-img="assets/img/slider/4.jpg"></div>
-			<div class="slide-caption">
-				<div class="inner-container clearfix">
-					<div class="first-sec">Family House</div>
-					<div class="sec-sec">in Chicago</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End of Main Slider -->
-
-    <!-- Property Search Box -->
-    <section id="property-search-container" class="container">
-        <div class="property-search-form horizontal">
+<?php 
+ob_start(); 
+?>
+<body class="home-page-1">
+    <?php include 'include/nav.php'; ?>
+	<!-- Google Map -->
+    <section id="google-map">
+		<!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+        <div id="map"></div>
+    </section>
+	<!-- End of Google Map -->
+	
+	<!-- Property Search Box -->
+	<section id="property-search-container" class="container">
+		<div class="property-search-form horizontal">
             <div class="main-search-sec">
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <input type="text" placeholder="Location" id="location-search-box">
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<input type="text" placeholder="Location" id="location-search-box">
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<select id="proeprty-status">
+    					<option value="0">Property Status</option>
+    					<option value="1">For Sale</option>
+    					<option value="2">For Rent</option>
+    				</select>
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<select id="proeprty-type">
+    					<option value="0">Property Type</option>
+    					<option value="1">Apartment</option>
+    					<option value="2">House</option>
+    					<option value="3">Villa</option>
+    					<option value="4">Office</option>
+    					<option value="5">Condo</option>
+    				</select>
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<input type="text" placeholder="Keyword" id="keyword">
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<select id="bedroom">
+    					<option value="0">Bedroom</option>
+    					<option value="1">1</option>
+    					<option value="2">2</option>
+    					<option value="3">3</option>
+    					<option value="4">4</option>
+    					<option value="5">5</option>
+    					<option value="6">+5</option>
+    				</select>
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<select id="bathroom">
+    					<option value="0">Bathroom</option>
+    					<option value="1">1</option>
+    					<option value="2">2</option>
+    					<option value="3">3</option>
+    					<option value="4">4</option>
+    					<option value="5">5</option>
+    					<option value="6">+5</option>
+    				</select>
+    			</div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+                    <input type="text" id="price_range" class="range-slider" name="price" value="" data-min="0" data-max="5000" />         
                 </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <select id="proeprty-status">
-                        <option value="0">Property Status</option>
-                        <option value="1">For Sale</option>
-                        <option value="2">For Rent</option>
-                    </select>
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <select id="proeprty-type">
-                        <option value="0">Property Type</option>
-                        <option value="1">Apartment</option>
-                        <option value="2">House</option>
-                        <option value="3">Villa</option>
-                        <option value="4">Office</option>
-                        <option value="5">Condo</option>
-                    </select>
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <input type="text" placeholder="Keyword" id="keyword">
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <select id="bedroom">
-                        <option value="0">Bedroom</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">+5</option>
-                    </select>
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <select id="bathroom">
-                        <option value="0">Bathroom</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">+5</option>
-                    </select>
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <input type="text" id="price_range" class="range-slider" name="price" value="" data-min="0" data-max="5000" />
-                </div>
-                <div class="col-xs-6 col-sm-3 search-field">
-                    <button class="btn">Search</button>
-                </div>
+    			<div class="col-xs-6 col-sm-3 search-field">
+    				<button class="btn" onclick="window.location = 'property-listing-map.php'">Search</button>
+    			</div>
             </div>
             <div class="advanced-search-sec">
                 <div class="col-xs-3 col-sm-3 col-md-2 search-field">
@@ -315,9 +177,9 @@
                 </div>
             </div>
             <button class="more-options btn">More Options <i class="fa fa-chevron-down"></i></button>
-        </div>
-    </section>
-    <!-- End of Property Search Box -->
+		</div>
+	</section>
+	<!-- End of Property Search Box -->
 
     <!-- Text Section -->
     <section class="text-section container">
@@ -325,35 +187,35 @@
         <div class="description">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse fugit illo ipsam iusto reiciendis tempora vel! Ad adipisci aliquid, asperiores aspernatur debitis deleniti, dolor dolorem enim eos eum, incidunt labore tempore? Accusantium aliquam at aut commodi consequatur culpa cum deleniti deserunt enim est ex excepturi harum id incidunt inventore ipsam iste libero, maiores minus nemo obcaecati officiis optio pariatur placeat provident quisquam ratione sapiente soluta temporibus vel veniam veritatis voluptatem.
         </div>
-        <div class="service-box-container clearfix">
-            <div class="col-sm-6 col-md-4 service-box wow fadeInUp">
-                <div class="inner-container">
-                    <i class="hsq-font-house-percent"></i>
-                    <div class="title">Selling Your Properties</div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 service-box wow fadeInUp">
-                <div class="inner-container">
-                    <i class="hsq-font-house-search"></i>
-                    <div class="title">Best Deals Suggestions</div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-0 service-box wow fadeInUp">
-                <div class="inner-container">
-                    <i class="hsq-font-house-dollar"></i>
-                    <div class="title">Give you professional consultation</div>
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="service-box-container clearfix">
+			<div class="col-sm-6 col-md-4 service-box wow fadeInUp">
+				<div class="inner-container">
+					<i class="hsq-font-house-percent"></i>
+					<div class="title">Selling Your Properties</div>
+					<div class="content">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-md-4 service-box wow fadeInUp">
+				<div class="inner-container">
+					<i class="hsq-font-house-search"></i>
+					<div class="title">Best Deals Suggestions</div>
+					<div class="content">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-0 service-box wow fadeInUp">
+				<div class="inner-container">
+					<i class="hsq-font-house-dollar"></i>
+					<div class="title">Professional consultation</div>
+					<div class="content">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eaque ex quisquam? Accusamus beatae maiores molestias sint sit. Accusantium, amet!
+					</div>
+				</div>
+			</div>
+		</div>
     </section>
     <!-- End of Text Section -->
 
@@ -366,12 +228,12 @@
                     <a href="#" class="img-container">
                         <span class="tag-label hot-offer">Hot Offer</span>
                         <img src="assets/img/property/1.jpg" alt="Image of Property">
-                        <span class="price">$850,000</span>
+						<span class="price">$850,000</span>
                     </a>
                     <div class="bottom-sec">
                         <a href="#" class="title">Broadway, Los Angles, California</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex necessitatibus quis aliquam, labore deserunt velit libero aperiam laboriosam cupiditate deleniti.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci distinctio facilis, libero nihil praesentium voluptatibus.
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -398,7 +260,7 @@
                     <div class="bottom-sec">
                         <a href="#" class="title">Wade Avenue, Raleigh, North Carolina</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam saepe error officia adipisci, cupiditate enim ex dolores quibusdam. Reiciendis, reprehenderit.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus facere facilis molestiae nostrum quisquam sint!
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -427,7 +289,7 @@
                     <div class="bottom-sec">
                         <a href="#" class="title">River Dr E, Skykomish, WA</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit soluta amet ipsa reiciendis accusantium, quaerat laudantium incidunt debitis excepturi itaque?
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi nam non, quibusdam tempora ut vel.
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -451,7 +313,7 @@
                     <div class="bottom-sec">
                         <a href="#" class="title">Wenatchee Ave, Wenatchee, WA</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam optio earum modi maiores nobis nihil temporibus mollitia architecto dignissimos tempora.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci eius modi officia quam rem repellat.
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -477,7 +339,7 @@
                     <div class="bottom-sec">
                         <a href="#" class="title">Main Street, Wake Forest, North Carolina</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse et eum atque ipsa amet, iusto suscipit quo.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis commodi eius ipsa maiores reiciendis!
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -507,7 +369,7 @@
                     <div class="bottom-sec">
                         <a href="#" class="title">Millbrook Road, Raleigh, North Carolina</a>
                         <div class="desc">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati facilis ipsum officiis earum rem eaque corporis cum vitae saepe fuga.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores blanditiis iure magni maiores praesentium voluptatibus.
                         </div>
                         <div class="extra-info clearfix">
                             <div class="area col-xs-4">
@@ -554,13 +416,12 @@
                             <img src="assets/img/property/5.jpg" alt="Image of Property">
                             <span class="price-box">$486,200</span>
                         </a>
-
                         <div class="col-xs-6 main-info">
                             <a href="#" class="title">Golden Family House</a>
 
                             <div class="location">Broadway, Los Angles, California</div>
                             <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse et eum atque ipsa amet, iusto suscipit quo.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium beatae cumque in nesciunt rerum. Error.
                             </div>
                             <div class="bottom-sec clearfix">
                                 <div class="extra-info">
@@ -573,22 +434,20 @@
                     </div>
                 </div>
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/6.jpg" alt="Image of Property">
-                            <span class="price-box">$850,300</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/6.jpg" alt="Image of Property">
+							<span class="price-box">$850,300</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">Great Villa</a>
 
                             <div class="location">Wade Avenue, Raleigh, North Carolina</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad dignissimos impedit minus odit perferendis voluptatem.
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
                                     <div class="bedroom">
                                         <div class="value">2</div>
                                         bedroom
@@ -597,12 +456,12 @@
                                         <div class="value">1</div>
                                         bathroom
                                     </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
             <div class="item">
                 <div class="propertybox-featured wow fadeInUp">
@@ -611,13 +470,12 @@
                             <img src="assets/img/property/7.jpg" alt="Image of Property">
                             <span class="price-box">$1,800,000</span>
                         </a>
-
                         <div class="col-xs-6 main-info">
                             <a href="#" class="title">Single Family Home</a>
 
                             <div class="location">River Dr E, Skykomish, WA</div>
                             <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse et eum atque ipsa amet, iusto suscipit quo.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eligendi inventore reiciendis sapiente ut! Reiciendis!
                             </div>
                             <div class="bottom-sec clearfix">
                                 <div class="extra-info">
@@ -633,119 +491,96 @@
                     </div>
                 </div>
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/8.jpg" alt="Image of Property">
-                            <span class="price-box">$998,320</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/8.jpg" alt="Image of Property">
+							<span class="price-box">$998,320</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">Cozy Villa in Suburb</a>
 
                             <div class="location">Wenatchee Ave, Wenatchee, WA</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
-                                    <div class="bedroom">
-                                        <div class="value">3</div>
-                                        bedroom
-                                    </div>
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta earum eligendi maiores pariatur, sequi tempore?
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
+									<div class="bedroom"><div class="value">3</div>bedroom</div>
                                     <div class="bathroom">
                                         <div class="value">1</div>
                                         bathroom
                                     </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
             <div class="item">
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/9.jpg" alt="Image of Property">
-                            <span class="price-box">$898,500</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/9.jpg" alt="Image of Property">
+							<span class="price-box">$898,500</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">Luxury Villa</a>
 
                             <div class="location">Main Street, Wake Forest, North Carolina</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
-                                    <div class="bedroom">
-                                        <div class="value">3</div>
-                                        bedroom
-                                    </div>
-                                    <div class="bathroom">
-                                        <div class="value">2</div>
-                                        bathroom
-                                    </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dicta molestiae nam nobis non odit!
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
+									<div class="bedroom"><div class="value">3</div>bedroom</div>
+									<div class="bathroom"><div class="value">2</div>bathroom</div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+				</div>
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/10.jpg" alt="Image of Property">
-                            <span class="price-box">$1,852,300</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/10.jpg" alt="Image of Property">
+							<span class="price-box">$1,852,300</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">House with Great View</a>
 
                             <div class="location">Millbrook Road, Raleigh, North Carolina</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
-                                    <div class="bedroom">
-                                        <div class="value">3</div>
-                                        bedroom
-                                    </div>
-                                    <div class="bathroom">
-                                        <div class="value">2</div>
-                                        bathroom
-                                    </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, autem consequuntur dolore harum quae quo?
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
+									<div class="bedroom"><div class="value">3</div>bedroom</div>
+									<div class="bathroom"><div class="value">2</div>bathroom</div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
             <div class="item">
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/11.jpg" alt="Image of Property">
-                            <span class="price-box">$958,000</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/11.jpg" alt="Image of Property">
+							<span class="price-box">$958,000</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">Modern Apartment</a>
 
                             <div class="location">Broadway, Los Angles, California</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti fugit impedit iusto, nulla suscipit veritatis.
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
                                     <div class="bedroom">
                                         <div class="value">2</div>
                                         bedroom
@@ -754,29 +589,27 @@
                                         <div class="value">1</div>
                                         bathroom
                                     </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+            	</div>
                 <div class="propertybox-featured wow fadeInUp">
-                    <div class="inner-container clearfix">
-                        <a href="#" class="img-container col-xs-6">
-                            <img src="assets/img/property/4.jpg" alt="Image of Property">
-                            <span class="price-box">$851,000</span>
-                        </a>
-
-                        <div class="col-xs-6 main-info">
+					<div class="inner-container clearfix">
+						<a href="#" class="img-container col-xs-6">
+							<img src="assets/img/property/4.jpg" alt="Image of Property">
+							<span class="price-box">$851,000</span>
+						</a>
+						<div class="col-xs-6 main-info">
                             <a href="#" class="title">Luxury Apartment</a>
 
                             <div class="location">Wade Avenue, Raleigh, North Carolina</div>
-                            <div class="desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse
-                                et eum atque ipsa amet, iusto suscipit quo.
-                            </div>
-                            <div class="bottom-sec clearfix">
-                                <div class="extra-info">
+							<div class="desc">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt iusto laborum molestias officia, possimus saepe!
+							</div>
+							<div class="bottom-sec clearfix">
+								<div class="extra-info">
                                     <div class="bedroom">
                                         <div class="value">4</div>
                                         bedroom
@@ -785,12 +618,12 @@
                                         <div class="value">3</div>
                                         bathroom
                                     </div>
-                                </div>
-                                <a href="#" class="btn more-link">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+								</div>
+								<a href="#" class="btn more-link">More Info</a>
+							</div>
+						</div>
+					</div>
+				</div>
             </div>
         </div>
     </section>
@@ -1004,100 +837,17 @@
 	</section>
 	<!--End of Our Partners-->
 
-	<!--Top Footer-->
-	<section id="top-footer" data-parallax="scroll" data-image-src="assets/img/top-footer-bg.jpg">
-		<div class="inner-container container">
-			<div class="widget-box col-md-6">
-				<h4>Home Square Newsletter</h4>
-				<div class="desc">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque cum in, mollitia nemo, non nostrum perferendis porro qui quisquam rem sit, tempora! Beatae cupiditate esse id itaque perspiciatis quasi sed.
-				</div>
-			</div>
-			<div class="widget-box col-md-6">
-				<h4>Get our free newsletter</h4>
-				<form action="#" id="newsletter-form">
-					<div class="input-container">
-						<input type="text" placeholder="Your Email">
-					</div>
-					<button class="btn">Submit</button>
-				</form>
-			</div>
-		</div>
-	</section>
-	<!--End of Top Footer-->
-
-	<footer id="main-footer">
-		<div class="inner-container container">
-			<div id="go-up" class="fa fa-angle-double-up"></div>
-			<div class="top-section clearfix">
-				<div class="col-md-4 widgets">
-					<div class="logo-main-box">
-						<span class="bold">Home</span>
-						<span> S</span>
-						<div class="logo"></div>
-						<span>uare</span>
-					</div>
-					<div class="desc">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores dolore doloremque dolores enim et ex excepturi exercitationem facere harum illum in., iusto magnam non nostrum numquam odio placeat possimus praesentium quae quo recusandae.
-					</div>
-				</div>
-				<div class="col-md-4 widgets">
-					<h4 class="title">Tags</h4>
-					<ul class="list-inline tag-list">
-						<li><a href="#">Apartment</a></li>
-						<li><a href="#">Villa</a></li>
-						<li><a href="#">Office For Rent</a></li>
-						<li><a href="#">Office</a></li>
-						<li><a href="#">Vacation Rental</a></li>
-						<li><a href="#">Villa For Sale</a></li>
-						<li><a href="#">Luxury Houses</a></li>
-					</ul>
-				</div>
-				<div class="col-md-4 widgets">
-					<h4 class="title">Get in touch with us</h4>
-					<ul class="contact-info">
-						<li><i class="fa fa-map-marker"></i>133 Elizabeth street, Sydney 4000, Australia</li>
-						<li class="phone"><i class="fa fa-phone"></i>0185 26 37 48 59</li>
-						<li><i class="fa fa-envelope"></i>info@RavisTheme.com</li>
-					</ul>
-				</div>
-			</div>
-			<div class="bott-section .clearfix">
-				<div class="col-md-6 copy-right">
-					Copyright by <a href="http://ravistheme.com" target="_blank">RavisTheme</a>. All rights reserved.
-				</div>
-				<div class="col-md-6 social-icons">
-					<ul class="list-inline">
-						<li><a href="#" class="fa fa-facebook"></a></li>
-						<li><a href="#" class="fa fa-twitter"></a></li>
-						<li><a href="#" class="fa fa-skype"></a></li>
-						<li><a href="#" class="fa fa-google-plus"></a></li>
-						<li><a href="#" class="fa fa-youtube"></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-
-    <!-- JS Include Section -->
-    <script type="text/javascript" src="assets/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="assets/js/helper.js"></script>
-    <script type="text/javascript" src="assets/js/select2.min.js"></script>
-    <script type="text/javascript" src="assets/js/ion.rangeSlider.min.js"></script>
-    <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
-
     <!-- Map Js -->
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <script type="text/javascript" src="assets/js/infobox_packed.js"></script>
     <script type="text/javascript" src="assets/js/richmarker-compiled.js"></script>
     <script type="text/javascript" src="assets/js/markerclusterer_packed.js"></script>
-    <script type="text/javascript" src="assets/js/data.json"></script>
     <!-- END OF Map Js -->
 
-    <script type="text/javascript" src="assets/js/template.js"></script>
-    <script type="text/javascript" src="assets/js/style-selector.js"></script>
-    <!-- End of JS Include Section -->
-
-</body>
-</html>
+<?php		  
+$content = ob_get_contents();
+ob_end_clean();
+include 'include/header.php';
+print $content;
+include 'include/footer.php'; 
+?>

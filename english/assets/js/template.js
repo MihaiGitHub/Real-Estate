@@ -40,6 +40,27 @@ function center(number) {
 
 }
 function initialize() {
+
+	var request = $.ajax({
+		url: "properties.php",
+		method: "POST",
+		data: { id : 45 }
+	});
+	
+	request.done(function( data ) {
+		createMap(data);
+	});
+	
+	request.fail(function( jqXHR, textStatus ) {
+		alert( "Request failed: " + textStatus );
+	});	
+
+}
+
+function createMap(data){
+	
+	var data = JSON.parse(data);
+console.log('create map', data)
 	var bodyClass = jQuery('body').hasClass('property-listing-page map'),
 		assetPath = (bodyClass == true ?  "../" : ''),
 		myLatLng   = new google.maps.LatLng(47.609519, 12.852459);
@@ -114,6 +135,7 @@ function initialize() {
 
 	var i;
 	var markers = [];
+	console.log('length ', data.property.length)
 
 	for (var i = 0; i < data.property.length; i++) {
 		var dataProperty = data.property[i];
@@ -187,14 +209,15 @@ function initialize() {
 			width:  30
 		}
 	];
+	console.log('markers ', markers)
 	var markerCluster = new MarkerClusterer(map, markers, {styles: clusterStyles, maxZoom: 15});
+	console.log('markerCluster ', markerCluster)
 
 	if (jQuery('#location-search-box').length > 0) {
 		var input        = document.getElementById('location-search-box');
 		var autocomplete = new google.maps.places.Autocomplete(input);
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
-
 }
 
 jQuery(document).ready(function () {
