@@ -16,8 +16,8 @@ $json = json_encode(array(
 					"bathroom" => 2
 					),
 		1 => array(  "pId" => 66550,
-					"longitude" => 5.251465,
-					"latitude" => 48.682801,
+					"longitude" => -112.234056,
+					"latitude" => 33.606024,
 					"pType" => "villa",
 					"title" => "Luxury Family House",
 					"price" => "$360,000",
@@ -28,8 +28,8 @@ $json = json_encode(array(
 					"bathroom" => 2
 				),
 		2 => array(  "pId" => 66502,
-					"longitude" => -99.316406,
-					"latitude" => 37.640335,
+					"longitude" => -112.205244,
+					"latitude" => 33.543527,
 					"pType" => "villa",
 					"title" => "Luxury Family House",
 					"price" => "$360,000",

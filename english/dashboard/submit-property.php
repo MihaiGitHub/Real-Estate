@@ -7,14 +7,40 @@ if(!$_SESSION['auth']){
 	exit;
 }
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+	echo '<pre>';
 	print_r($_POST);
+	echo '</pre>';
+
+$address = $_POST['p-address'];
+//    CURLOPT_URL => 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA',
+
+// Get cURL resource
+$curl = curl_init();
+// Set some options - we are passing in a useragent too here
+curl_setopt_array($curl, array(
+    CURLOPT_RETURNTRANSFER => 1,
+    CURLOPT_URL => 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address),
+    CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+));
+// Send the request & save response to $resp
+$resp = curl_exec($curl);
+// Close request to clear up some resources
+curl_close($curl);
+
+$data = json_decode($resp, true);
+
+echo 'Latitude '.$data['results'][0]['geometry']['location']['lat'];
+echo 'Longitude '.$data['results'][0]['geometry']['location']['lng'];
+
+
 
 	include 'include/dbconnect.php';
 
-	$stmt = $objDb->prepare('INSERT INTO properties (`title`, `description`) VALUES (:title, :description)');
-	if($stmt->execute(array('title' => $_POST['p-title'], 'description' => $_POST['p-desc']))){
+	$stmt = $objDb->prepare('INSERT INTO properties (`title`, `description`, `lat`, `lng`) VALUES (:title, :description, :lat, :lng)');
+	if($stmt->execute(array('title' => $_POST['p-title'], 'description' => $_POST['p-desc'], 'lat' => $data['results'][0]['geometry']['location']['lat'], 'lng' => $data['results'][0]['geometry']['location']['lng']))){
 		echo 'added successfully';
 	}
+
 }
 ?>
 <body class="submit-property">
@@ -448,6 +474,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		</div>
 	</section>
 </span>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+<script>
+
+  var geocoder = new google.maps.Geocoder();
+  var address = "6744 W Northview Ave";
+
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+
+
+console.log('location ',results[0].geometry.location)
+
+		/*
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+	  */
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+</script>
 <?php		  
 $content = ob_get_contents();
 ob_end_clean();

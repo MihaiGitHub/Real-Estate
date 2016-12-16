@@ -29,7 +29,7 @@
                 <!-- Main Menu -->
                 <nav id="main-menu" class="hidden-xs hidden-sm">
                     <ul class="main-menu list-inline">
-                        <li><span class="current">Home</span><!--
+                        <li><span class="current"><a href="index.php">Home</a></span><!--
                             <ul>
                                 <li><a href="index.html" class="current">Home - Map</a></li>
                                 <li><a href="index-slider.html">Home - Slider</a></li>
@@ -47,10 +47,10 @@
 								<li><a href="pages/property-details.html">Property Details</a></li>
                             </ul>
                         </li>-->
-                        <li><a href="pages/compare.html">Property Compare</a></li>
+                        <li><a href="compare.php">Property Compare</a></li>
                         <li><span>Agents</span>
                             <ul>
-                                <li><a href="pages/agents.html">Agents Listing</a></li>
+                                <li><a href="agents.php">Agents Listing</a></li>
                                 <li><a href="pages/agent-details.html">Agent Details</a></li>
                             </ul>
                         </li><!--
