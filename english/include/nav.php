@@ -51,7 +51,7 @@
                         <li><span>Agents</span>
                             <ul>
                                 <li><a href="agents.php">Agents Listing</a></li>
-                                <li><a href="pages/agent-details.html">Agent Details</a></li>
+                                <li><a href="agent-details.php">Agent Details</a></li>
                             </ul>
                         </li><!--
                         <li><span>Gallery</span>
@@ -73,11 +73,11 @@
 								<li><a href="pages/testimonials.html">Testimonials</a></li>
 								<li><a href="pages/video-tour.html">Video Tour</a></li>
 								<li><a href="pages/404.html">404</a></li> -->
-								<li><a href="pages/services.html">Services</a></li>
-								<li><a href="pages/faq.html">FAQ</a></li>
+								<li><a href="services.php">Services</a></li>
+								<li><a href="faq.php">FAQ</a></li>
 							</ul>
 						</li>
-                        <li><a href="pages/contact.html">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                     </ul>
                 </nav>
                 <!-- END of Main Menu -->

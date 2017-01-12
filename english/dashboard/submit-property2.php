@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 	$address = $_POST['p-address'];
-/* old
+
 	// Get cURL resource
 	$curl = curl_init();
 	// Set some options - we are passing in a useragent too here
@@ -34,14 +34,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `description`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`) VALUES (:uid, :title, :description, :lat, :lng, :price, :bedrooms, :bathrooms)');
 	$result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'description' => $_POST['p-desc'], 'lat' => $data['results'][0]['geometry']['location']['lat'], 'lng' => $data['results'][0]['geometry']['location']['lng'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'],'bathrooms' => $_POST['p-bathroom']));
-	*/
-	///////////////////
-	
-		include 'include/dbconnect.php';
-
-	$stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `description`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`) VALUES (:uid, :title, :description, :lat, :lng, :price, :bedrooms, :bathrooms)');
-	$result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'description' => $_POST['p-desc'], 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'],'bathrooms' => $_POST['p-bathroom']));
-//////////////////////////
 	
 	if($result){
 		$pid = $objDb->lastInsertId($result);
@@ -88,9 +80,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 ?>
 <body class="submit-property">
-		<?php include 'include/nav.php'; ?>
-
-
+	<?php include 'include/nav.php'; ?>
+<span class="submit-property">
 	<!--Breadcrumb Section-->
 	<section class="breadcrumb-box" data-parallax="scroll" data-image-src="../assets/img/breadcrumb-bg.jpg">
 		<div class="inner-container container">
@@ -208,7 +199,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 									</div>
 								</div>
 								<div class="field-row">
-									<textarea name="p-desc" id="p-desc" name="p-desc" placeholder="Description"></textarea>
+									<textarea name="p-desc" id="p-desc" placeholder="Description"></textarea>
 								</div>
 							</div>
 						</div>
@@ -417,14 +408,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 								<input type="text" placeholder="Address" name="p-address" id="p-address">
 							</div>
 							<div class="field-row">
-								<div id="p-map"></div>
+							<!--	<div id="p-map"></div> -->
+
 							</div>
 							<div class="field-row clearfix">
 								<div class="col-xs-6">
-									<input type="text" placeholder="Longitude" id="p-long" name="p-long">
+									<input type="text" placeholder="Longitude" id="p-long" disabled>
 								</div>
 								<div class="col-xs-6">
-									<input type="text" placeholder="Latitude" id="p-lat" name="p-lat">
+									<input type="text" placeholder="Latitude" id="p-lat" disabled>
 								</div>
 							</div>
 
@@ -490,8 +482,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					</div>
 				</div>
 				</div>
-	
-				
+
 				<div class="row b-sec">
 					<div class="information-box">
 						<h3>Gallery <i class="fa fa-info"></i></h3>
@@ -515,13 +506,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		<!-------Including CSS File------>
         <link rel="stylesheet" type="text/css" href="css/uploadstyle.css">
 
-                    Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 6MB.
+				<h2>Multiple Image Upload Form</h2>
+          <!--      <form enctype="multipart/form-data" action="" method="post"> -->
+                    First Field is Compulsory. Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 6MB.
                     <hr/>
                     <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>
            
-               <!--     <input type="button" id="add_more" class="upload" value="Add More Files"/> -->
-					<button class="btn" id="add_more" type="button">Add More Files</button>
-                
+                    <input type="button" id="add_more" class="upload" value="Add More Files"/>
+           <!--         <input type="submit" value="Upload File" name="submit" id="upload" class="upload"/>
+                </form> -->
                 <br/>
                 <br/>
 				<!-------Including PHP Script here------>
@@ -536,7 +529,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 						</div>
 					</div>
 				</div>
-				
+
+
 				<div class="row b-sec">
 					<div class="information-box">
 						<button class="btn" type="submit">Save Property</button>
@@ -545,106 +539,45 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			</form>
 		</div>
 	</section>
-
-	<!-- JS Include Section -->
-	<script type="text/javascript" src="../assets/js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="../assets/js/helper.js"></script>
-	<script type="text/javascript" src="../assets/js/select2.min.js"></script>
-	<script type="text/javascript" src="../assets/js/dropzone.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-	<script type="text/javascript" src="../assets/js/template.js"></script>
-	<!-- End of JS Include Section -->
-	<script type="text/javascript">
-		function initialize() {
-			var myLatLng = new google.maps.LatLng(40.6700, -73.9400);
-			var mapOptions = {
-				zoom: 12,
-				center: myLatLng,
-				// This is where you would paste any style found on Snazzy Maps.
-				styles: [{featureType:"landscape",stylers:[{saturation:-100},{lightness:65},{visibility:"on"}]},{featureType:"poi",stylers:[{saturation:-100},{lightness:51},{visibility:"simplified"}]},{featureType:"road.highway",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"road.arterial",stylers:[{saturation:-100},{lightness:30},{visibility:"on"}]},{featureType:"road.local",stylers:[{saturation:-100},{lightness:40},{visibility:"on"}]},{featureType:"transit",stylers:[{saturation:-100},{visibility:"simplified"}]},{featureType:"administrative.province",stylers:[{visibility:"off"}]},{featureType:"administrative.locality",stylers:[{visibility:"off"}]},{featureType:"administrative.neighborhood",stylers:[{visibility:"on"}]},{featureType:"water",elementType:"labels",stylers:[{visibility:"off"},{lightness:-25},{saturation:-100}]},{featureType:"water",elementType:"geometry",stylers:[{hue:"#ffff00"},{lightness:-25},{saturation:-97}]}],
-
-				// Extra options
-				mapTypeControl: false,
-				panControl: false,
-				zoomControlOptions: {
-					style: google.maps.ZoomControlStyle.SMALL,
-					position: google.maps.ControlPosition.LEFT_BOTTOM
-				}
-			};
-			var map = new google.maps.Map(document.getElementById('p-map'), mapOptions);
-			var image = '../assets/img/marker-1.png';
-
-			var marker = new google.maps.Marker({
-				position: myLatLng,
-				map: map,
-				draggable: true,
-				icon: image
-			});
-			if (jQuery('#p-address').length > 0) {
-				var input = document.getElementById('p-address');
-				var autocomplete = new google.maps.places.Autocomplete(input);
-				google.maps.event.addListener(autocomplete, 'place_changed', function () {
-					var place = autocomplete.getPlace();
-					jQuery('#p-lat').val(place.geometry.location.lat());
-					jQuery('#p-long').val(place.geometry.location.lng());
-					marker.setPosition(place.geometry.location);
-					map.setCenter(place.geometry.location);
-					map.setZoom(15);
-				});
-			}
-			google.maps.event.addListener(marker, 'dragend', function (event) {
-				jQuery('#p-lat').val(event.latLng.lat());
-				jQuery('#p-long').val(event.latLng.lng());
-			});
-		}
-
-
-		google.maps.event.addDomListener(window, 'load', initialize);
-
-		jQuery(document).ready(function(){
-			// Enable Uploader
-
-			var previewNode = document.querySelector("#preview-template");
-			previewNode.id = "";
-			var previewTemplate = previewNode.parentNode.innerHTML;
-			previewNode.parentNode.removeChild(previewNode);
+</span>
+	<!-- Google Map -->
+    <section id="google-map">
+		<!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+        <div id="map"></div>
+    </section>
+	<!-- End of Google Map -->
+    <!-- Map Js -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <script type="text/javascript" src="../assets/js/infobox_packed.js"></script>
+    <script type="text/javascript" src="../assets/js/richmarker-compiled.js"></script>
+    <script type="text/javascript" src="../assets/js/markerclusterer_packed.js"></script>
+    <!-- END OF Map Js -->
+	
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script> -->
+<script>
 /*
-			jQuery('#floorplan-uploader').dropzone({
-				url: "../../uploader.php",
-				thumbnailWidth: 105,
-				thumbnailHeight: 105,
-				maxFilesize: 5,
-				previewTemplate: previewTemplate,
-				acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
-				clickable: "#add-floorplan",
-				success: function (file, response) {
-					jQuery(window).trigger('resize.px.parallax');
-				}
+  var geocoder = new google.maps.Geocoder();
+  var address = "6744 W Northview Ave";
+
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+
+
+		console.log('location ',results[0].geometry.location)
+
+		
+			resultsMap.setCenter(results[0].geometry.location);
+			var marker = new google.maps.Marker({
+				map: resultsMap,
+				position: results[0].geometry.location
 			});
-
-
-			var previewNode = document.querySelector("#gallery-preview-template");
-			previewNode.id = "";
-			var previewTemplate = previewNode.parentNode.innerHTML;
-			previewNode.parentNode.removeChild(previewNode);
-
-			jQuery('#gallery-uploader').dropzone({
-				url: "../../uploader.php",
-				thumbnailWidth: 105,
-				thumbnailHeight: 105,
-				maxFilesize: 5,
-				previewTemplate: previewTemplate,
-				acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
-				clickable: "#add-gallery",
-				success: function (file, response) {
-					jQuery(window).trigger('resize.px.parallax');
-				}
-			});
-			*/
-		});
-
-	</script>
-
+	  
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+   */
+</script>
 <?php		  
 $content = ob_get_contents();
 ob_end_clean();

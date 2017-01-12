@@ -183,7 +183,7 @@ console.log('create map', data)
 			'<div class="bedroom"><div class="value">' + dataProperty.bedroom + '</div>bedroom</div>' +
 			'<div class="bathroom"><div class="value">' + dataProperty.bathroom + '</div>bathroom</div>' +
 			'</div>' +
-			'<a href="#' + dataProperty.pId + '" class="btn more-link">More Info</a>' +
+			'<a href="property-details.php?id=' + dataProperty.pId + '" class="btn more-link">More Info</a>' +
 			'</div>' +
 			'</div>' +
 			'</div>' +

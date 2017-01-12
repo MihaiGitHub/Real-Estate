@@ -6,33 +6,6 @@ include 'include/dbconnect.php';
 $stmt = $objDb->prepare('SELECT id, title, description FROM properties');
 $result = $stmt->execute();
 
-
-//$object = (object) ['property' => 'Here we go'];
-
-//var_dump($object);
-
-$json = json_encode(array(
-     
-     "count" => 69,
-     "property" => array(
-      	"pId" => 665502,
-		"longitude" => -124.077530,
-		"latitude" => 44.519888,
-		"pType" => "villa",
-		"title" => "Luxury Family House",
-		"price" => "$360,000",
-		"pImage" => "11.jpg",
-		"location" => "4600 Cresthaven Drive,  Colleyville",
-		"description" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias impedit autem esse et eum atque ipsa amet, iusto suscipit quo.", 
-		"bedroom" => 3, 
-		"bathroom" => 2
-     )
-));
-
-echo '<pre>';
-echo $json;
-echo '</pre>';
-
 ?>
 <body class="property-listing-page map">
 	<?php include 'include/nav.php'; ?>
@@ -236,7 +209,7 @@ echo '</pre>';
 									<div class="bathroom col-xs-4"><div class="value">2</div>bath</div>
 								</div>
 							</div>
-							<a href="#" class="btn more-link">More</a>
+							<a href="property-details.php?id=222" class="btn more-link">More<?php echo 2222.urlencode($row['id']); ?></a>
 						</div>
 					</div>
 <?php } ?>

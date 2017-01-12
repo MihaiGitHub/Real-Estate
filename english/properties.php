@@ -1,4 +1,32 @@
 <?php
+include 'include/dbconnect.php';
+
+$stmt = $objDb->prepare('SELECT id, title, description, lat, lng, price, bedrooms, bathrooms FROM properties');
+$result = $stmt->execute();
+
+while($row = $stmt->fetch()){
+	$property[]	= array(
+			"pId" => $row['id'], 
+			"longitude" => $row['lng'], 
+			"latitude" => $row['lat'], 
+			"title" => $row['title'], 
+			"description" => $row['description'],
+			"price" => $row['price'],
+			"bedroom" => $row['bedrooms'],
+			"bathroom" => $row['bathrooms'],
+	);	
+}
+
+
+
+$json = json_encode(array(
+	"count" => 69,
+	"property" => $property
+));
+
+
+
+/*
 $json = json_encode(array(
      
      "count" => 69,
@@ -44,6 +72,7 @@ $json = json_encode(array(
      )
 	 
 ));
+*/
 
 echo $json;
 ?>
