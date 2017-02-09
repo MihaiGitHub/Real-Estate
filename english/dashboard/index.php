@@ -91,7 +91,7 @@ $stmt->setFetchMode(PDO::FETCH_ASSOC);
 								</div>
 							</div>
 						</div>
-						<a href="#" class="btn more-link">More</a>
+						<a href="../property-details.php?id=<?php echo $row['id']; ?>" class="btn more-link">More</a>
 					</div>
 				</div>
 			<?php } ?>

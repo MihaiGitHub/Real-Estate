@@ -8,13 +8,11 @@ if(!$_SESSION['auth']){
 }
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+//	echo '<pre>';
+//	print_r($_POST);
+//	echo '</pre>';
 
-/*
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
-	exit;
-*/
+
 	$address = $_POST['p-address'];
 /* old
 	// Get cURL resource
@@ -39,22 +37,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	*/
 	///////////////////
 	
-	include 'include/dbconnect.php';
+		include 'include/dbconnect.php';
 
-	if(!isset($_SESSION['pid'])){
-
-$stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `property_status`, `property_type`, `description`, `features`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`, `garages`, `land_area`) VALUES (:uid, :title, :property_status, :property_type, :description, :features, :lat, :lng, :price, :bedrooms, :bathrooms, :garages, :land_area)');
-$result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'property_status' => $_POST['p-status'], 'property_type' => $_POST['p-type'], 'description' => $_POST['p-desc'], 'features' => implode(",",$_POST["features"]), 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'], 'bathrooms' => $_POST['p-bathroom'], 'garages' => $_POST['p-garage'], 'land_area' => $_POST['p-land']));
-	} else {
-
-$stmt = $objDb->prepare('UPDATE properties SET title = :title, property_status = :property_status, property_type = :property_type, description = :description, features = :features, lat = :lat, lng = :lng, price = :price, bedrooms = :bedrooms, bathrooms = :bathrooms, garages = :garages, land_area = :land_area WHERE id = :pid');
-$result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' => $_POST['p-status'], 'property_type' => $_POST['p-type'], 'description' => $_POST['p-desc'], 'features' => implode(",",$_POST["features"]), 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'], 'bathrooms' => $_POST['p-bathroom'], 'garages' => $_POST['p-garage'],'land_area' => $_POST['p-land'],  'pid' => $_SESSION['pid']));
-
-	}
+	$stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `description`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`) VALUES (:uid, :title, :description, :lat, :lng, :price, :bedrooms, :bathrooms)');
+	$result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'description' => $_POST['p-desc'], 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'],'bathrooms' => $_POST['p-bathroom']));
 //////////////////////////
 	
 	if($result){
-		/*
 		$pid = $objDb->lastInsertId($result);
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +78,6 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 		//			echo $j. ').<span id="error">***Invalid file Size or Type***</span><br/><br/>';
 				}
 		}
-		*/
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -101,7 +89,8 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 }
 ?>
 <body class="submit-property">
-	<?php include 'include/nav.php'; ?>
+		<?php include 'include/nav.php'; ?>
+
 
 	<!--Breadcrumb Section-->
 	<section class="breadcrumb-box" data-parallax="scroll" data-image-src="../assets/img/breadcrumb-bg.jpg">
@@ -131,7 +120,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 			</div>
 		</div>
 		<div class="submit-main-box clearfix">
-			<form action="submit-property.php" id="submit-property-main-form" method="post">
+			<form action="submit-property.php" id="submit-property-main-form" method="POST" enctype="multipart/form-data">
 				<div class="row t-sec">
 					<div class="col-md-6 l-sec">
 						<div class="information-box">
@@ -143,20 +132,20 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 								</div>
 								<div class="field-row clearfix">
 									<div class="col-xs-6">
-										<select id="p-status" name="p-status">
+										<select id="p-status">
 											<option value="0">Property Status</option>
-											<option value="For Sale">For Sale</option>
-											<option value="For Rent">For Rent</option>
+											<option value="1">For Sale</option>
+											<option value="2">For Rent</option>
 										</select>
 									</div>
 									<div class="col-xs-6">
-										<select id="p-type" name="p-type">
+										<select id="p-type">
 											<option value="0">Property Type</option>
-											<option value="Apartment">Apartment</option>
-											<option value="House">House</option>
-											<option value="Villa">Villa</option>
-											<option value="Office">Office</option>
-											<option value="Condo">Condo</option>
+											<option value="1">Apartment</option>
+											<option value="2">House</option>
+											<option value="3">Villa</option>
+											<option value="4">Office</option>
+											<option value="5">Condo</option>
 										</select>
 									</div>
 								</div>
@@ -192,7 +181,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 										</select>
 									</div>
 									<div class="col-xs-6">
-										<select id="garage" name="p-garage">
+										<select id="garage">
 											<option value="0">Garages</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
@@ -206,19 +195,21 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 								<div class="field-row clearfix">
 									<div class="col-xs-6">
 										<div class="input-group r-icon">
-											<input type="text" class="form-control number-field" id="p-land" name="p-land" placeholder="Land Area">
+											<input type="text" class="form-control number-field" id="p-land"
+												   placeholder="Land Area">
 											<span class="input-group-addon">m2</span>
 										</div>
 									</div>
 									<div class="col-xs-6">
 										<div class="input-group r-icon">
-											<input type="text" class="form-control number-field" id="p-build" name="p-build" placeholder="Build Aria">
+											<input type="text" class="form-control number-field" id="p-build"
+												   placeholder="Build Aria">
 											<span class="input-group-addon">m2</span>
 										</div>
 									</div>
 								</div>
 								<div class="field-row">
-									<textarea name="p-desc" id="p-desc" placeholder="Description"></textarea>
+									<textarea name="p-desc" id="p-desc" name="p-desc" placeholder="Description"></textarea>
 								</div>
 							</div>
 						</div>
@@ -230,42 +221,42 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 								<ul class="features-box-submit clearfix">
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-1">
-											<input type="checkbox" value="Attic" id="p-f-1" name="features[]">
+											<input type="checkbox" value="1" id="p-f-1">
 											<span></span>
 											Attic
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-2">
-											<input type="checkbox" value="Gas heat" id="p-f-2" name="features[]">
+											<input type="checkbox" value="1" id="p-f-2">
 											<span></span>
 											Gas heat
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-3">
-											<input type="checkbox" value="Ocean view" id="p-f-3" name="features[]">
+											<input type="checkbox" value="1" id="p-f-3">
 											<span></span>
 											Ocean view
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-4">
-											<input type="checkbox" value="Wine cellar" id="p-f-4" name="features[]">
+											<input type="checkbox" value="1" id="p-f-4">
 											<span></span>
 											Wine cellar
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-5">
-											<input type="checkbox" value="Basketball court" id="p-f-5" name="features[]">
+											<input type="checkbox" value="1" id="p-f-5">
 											<span></span>
 											Basketball court
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-6">
-											<input type="checkbox" value="Gym" id="p-f-6" name="features[]">
+											<input type="checkbox" value="1" id="p-f-6">
 											<span></span>
 											Gym
 										</label
@@ -273,126 +264,126 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-7">
-											<input type="checkbox" value="Pound" id="p-f-7" name="features[]">
+											<input type="checkbox" value="1" id="p-f-7">
 											<span></span>
 											Pound
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-8">
-											<input type="checkbox" value="Fireplace" id="p-f-8" name="features[]">
+											<input type="checkbox" value="1" id="p-f-8">
 											<span></span>
 											Fireplace
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-9">
-											<input type="checkbox" value="Lake view" id="p-f-9" name="features[]">
+											<input type="checkbox" value="1" id="p-f-9">
 											<span></span>
 											Lake view
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-10">
-											<input type="checkbox" value="Pool" id="p-f-10" name="features[]">
+											<input type="checkbox" value="1" id="p-f-10">
 											<span></span>
 											Pool
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-11">
-											<input type="checkbox" value="Back yard" id="p-f-11" name="features[]">
+											<input type="checkbox" value="1" id="p-f-11">
 											<span></span>
 											Back yard
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-12">
-											<input type="checkbox" value="Front yard" id="p-f-12" name="features[]">
+											<input type="checkbox" value="1" id="p-f-12">
 											<span></span>
 											Front yard
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-13">
-											<input type="checkbox" value="Fenced yard" id="p-f-13" name="features[]">
+											<input type="checkbox" value="1" id="p-f-13">
 											<span></span>
 											Fenced yard
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-14">
-											<input type="checkbox" value="Sprinklers" id="p-f-14" name="features[]">
+											<input type="checkbox" value="1" id="p-f-14">
 											<span></span>
 											Sprinklers
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-15">
-											<input type="checkbox" value="Washer and dryer" id="p-f-15" name="features[]">
+											<input type="checkbox" value="1" id="p-f-15">
 											<span></span>
 											Washer and dryer
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-16">
-											<input type="checkbox" value="Deck" id="p-f-16" name="features[]">
+											<input type="checkbox" value="1" id="p-f-16">
 											<span></span>
 											Deck
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-17">
-											<input type="checkbox" value="Balcony" id="p-f-17" name="features[]">
+											<input type="checkbox" value="1" id="p-f-17">
 											<span></span>
 											Balcony
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-18">
-											<input type="checkbox" value="Laundry" id="p-f-18" name="features[]">
+											<input type="checkbox" value="1" id="p-f-18">
 											<span></span>
 											Laundry
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-19">
-											<input type="checkbox" value="Concierge" id="p-f-19" name="features[]">
+											<input type="checkbox" value="1" id="p-f-19">
 											<span></span>
 											Concierge
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-20">
-											<input type="checkbox" value="Doorman" id="p-f-20" name="features[]">
+											<input type="checkbox" value="1" id="p-f-20">
 											<span></span>
 											Doorman
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-21">
-											<input type="checkbox" value="Private space" id="p-f-21" name="features[]">
+											<input type="checkbox" value="1" id="p-f-21">
 											<span></span>
 											Private space
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-22">
-											<input type="checkbox" value="Storage" id="p-f-22" name="features[]">
+											<input type="checkbox" value="1" id="p-f-22">
 											<span></span>
 											Storage
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-23">
-											<input type="checkbox" value="Recreation" id="p-f-23" name="features[]">
+											<input type="checkbox" value="1" id="p-f-23">
 											<span></span>
 											Recreation
 										</label>
 									</li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-24">
-											<input type="checkbox" value="Roof Deck" id="p-f-24" name="features[]">
+											<input type="checkbox" value="1" id="p-f-24">
 											<span></span>
 											Roof Deck
 										</label>
@@ -500,6 +491,8 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 					</div>
 				</div>
 				</div>
+	
+				
 				<div class="row b-sec">
 					<div class="information-box">
 						<h3>Gallery <i class="fa fa-info"></i></h3>
@@ -512,13 +505,58 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 										<div class="error text-danger" data-dz-errormessage></div>
 										<div class="progress-box" data-dz-uploadprogress></div>
 									</div>
-									<div class="btn add-images-btn" id="add-gallery">Brows Image</div>
+									
+   
+
+
+<!-------Including jQuery from google------>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/uploadscript.js"></script>
+		
+		<!-------Including CSS File------>
+        <link rel="stylesheet" type="text/css" href="css/uploadstyle.css">
+
+                    Only JPEG,PNG,JPG Type Image Uploaded. Image Size Should Be Less Than 6MB.
+                    <hr/>
+                    <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>
+           
+               <!--     <input type="button" id="add_more" class="upload" value="Add More Files"/> -->
+					<button class="btn" id="add_more" type="button">Add More Files</button>
+                
+                <br/>
+                <br/>
+				<!-------Including PHP Script here------>
+                <?php //include "upload.php"; ?>
+
+
+
+
+
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<div class="row b-sec">
+					<div class="information-box">
+						<h3>Galeria Zdjeć <i class="fa fa-info"></i></h3>
+						<div class="box-content">
+							<div class="uploader-container">
+								<div id="gallery-uploader" class="img-uploader">
+									<div id="gallery-preview-template" class="preview-box">
+										<i class="fa fa-remove" data-dz-remove></i>
+										<img data-dz-thumbnail />
+										<div class="error text-danger" data-dz-errormessage></div>
+										<div class="progress-box" data-dz-uploadprogress></div>
+									</div>
+									<div class="btn add-images-btn" id="add-gallery">Dodaj Zdjęcia</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div class="row b-sec">
 					<div class="information-box">
 						<button class="btn" type="submit">Save Property</button>
@@ -592,7 +630,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 			previewNode.parentNode.removeChild(previewNode);
 
 			jQuery('#floorplan-uploader').dropzone({
-				url: "upload.php",
+				url: "../../uploader.php",
 				thumbnailWidth: 105,
 				thumbnailHeight: 105,
 				maxFilesize: 5,
@@ -611,7 +649,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 			previewNode.parentNode.removeChild(previewNode);
 
 			jQuery('#gallery-uploader').dropzone({
-				url: "upload.php",
+				url: "../../uploader.php",
 				thumbnailWidth: 105,
 				thumbnailHeight: 105,
 				maxFilesize: 5,
@@ -622,18 +660,15 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 					jQuery(window).trigger('resize.px.parallax');
 				}
 			});
+			
 		});
 
 	</script>
-
-
 
 <?php		  
 $content = ob_get_contents();
 ob_end_clean();
 include 'include/header.php';
 print $content;
-//include 'include/footer.php'; 
+include 'include/footer.php'; 
 ?>
-</body>
-</html>

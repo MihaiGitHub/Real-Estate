@@ -1,3 +1,4 @@
+<?php unset($_SESSION['pid']); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

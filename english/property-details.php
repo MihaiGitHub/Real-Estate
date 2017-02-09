@@ -3,10 +3,22 @@ ob_start();
 
 include 'include/dbconnect.php';
 
-$stmt = $objDb->prepare('SELECT id, title, description, lat, lng, price, bedrooms, bathrooms FROM properties WHERE id = :id');
+$stmt = $objDb->prepare('SELECT * FROM properties WHERE id = :id');
 $result = $stmt->execute(array('id' => $_GET['id']));
 $stmt->setFetchMode(PDO::FETCH_ASSOC);
 $row = $stmt->fetch();
+
+$features_array = explode(",",$row['features']);
+
+echo '<pre>';
+print_r($features_array);
+echo '</pre>';
+
+// Query images
+$stmtImg = $objDb->prepare('SELECT url FROM properties_images WHERE pid = :pid');
+$resultImg = $stmtImg->execute(array('pid' => $_GET['id']));
+$stmtImg->setFetchMode(PDO::FETCH_ASSOC);
+
 
 ?>
 <body class="property-details">
@@ -41,24 +53,15 @@ $row = $stmt->fetch();
 		<!-- End of Main Slider -->
 
 		<div id="property-thumb-slider" class="container">
+		<?php while($rowImg = $stmtImg->fetch()){ ?>
+
 			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/1.jpg"></div><!-- Change the URL section based on your image\'s name -->
+				<div class="img-container" data-bg-img="dashboard/<?php echo $rowImg['url']; ?>"></div><!-- Change the URL section based on your image\'s name -->
 			</div>
-			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/2.jpg"></div>
-			</div>
-			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/3.jpg"></div>
-			</div>
-			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/4.jpg"></div>
-			</div>
-			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/5.jpg"></div>
-			</div>
-			<div class="items">
-				<div class="img-container" data-bg-img="../assets/img/slider/6.jpg"></div>
-			</div>
+
+		<?php } ?>
+
+			
 		</div>
 	</section>
 
@@ -69,7 +72,7 @@ $row = $stmt->fetch();
 					<!--Highlight Section-->
 					<div class="highlight-container">
 						<div class="highlight-details-box">
-							<div class="value">750</div>
+							<div class="value"><?php echo $row['land_area']; ?></div>
 							<div class="text">Land Size</div>
 							<div class="unit">m2</div>
 						</div>
@@ -143,39 +146,38 @@ $row = $stmt->fetch();
 								</div>
 							</div>
 							<div class="b-sec">
-<?php echo $row['description']; ?>
+									<?php echo $row['description']; ?>
 							</div>
 						</div>
 					</div>
-
 					<div class="information-box">
 						<h3>Features </h3>
 						<div class="box-content">
 							<ul class="features-box clearfix">
-								<li class="col-sm-6 col-lg-4 active">Attic</li>
-								<li class="col-sm-6 col-lg-4 active">Gas heat</li>
-								<li class="col-sm-6 col-lg-4 active">Ocean view</li>
-								<li class="col-sm-6 col-lg-4 active">Wine cellar</li>
-								<li class="col-sm-6 col-lg-4">Basketball court</li>
-								<li class="col-sm-6 col-lg-4">Gym</li>
-								<li class="col-sm-6 col-lg-4 active">Pound</li>
-								<li class="col-sm-6 col-lg-4 active">Fireplace</li>
-								<li class="col-sm-6 col-lg-4 active">Lake view</li>
-								<li class="col-sm-6 col-lg-4 active">Pool</li>
-								<li class="col-sm-6 col-lg-4 active">Back yard</li>
-								<li class="col-sm-6 col-lg-4 active">Front yard</li>
-								<li class="col-sm-6 col-lg-4">Fenced yard</li>
-								<li class="col-sm-6 col-lg-4">Sprinklers</li>
-								<li class="col-sm-6 col-lg-4 active">Washer and dryer</li>
-								<li class="col-sm-6 col-lg-4 active">Deck</li>
-								<li class="col-sm-6 col-lg-4 active">Balcony</li>
-								<li class="col-sm-6 col-lg-4 active">Laundry</li>
-								<li class="col-sm-6 col-lg-4 active">Concierge</li>
-								<li class="col-sm-6 col-lg-4">Doorman</li>
-								<li class="col-sm-6 col-lg-4 active">Private space</li>
-								<li class="col-sm-6 col-lg-4 active">Storage</li>
-								<li class="col-sm-6 col-lg-4 active">Recreation</li>
-								<li class="col-sm-6 col-lg-4 active">Roof Deck</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Attic', $features_array, true)) echo 'active'; ?>">Attic</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Gas heat', $features_array, true)) echo 'active'; ?>">Gas heat</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Ocean view', $features_array, true)) echo 'active'; ?>">Ocean view</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Wine cellar', $features_array, true)) echo 'active'; ?>">Wine cellar</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Basketball court', $features_array, true)) echo 'active'; ?>">Basketball court</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Gym', $features_array, true)) echo 'active'; ?>">Gym</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Pound', $features_array, true)) echo 'active'; ?>">Pound</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Fireplace', $features_array, true)) echo 'active'; ?>">Fireplace</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Lake view', $features_array, true)) echo 'active'; ?>">Lake view</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Pool', $features_array, true)) echo 'active'; ?>">Pool</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Back yard', $features_array, true)) echo 'active'; ?>">Back yard</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Front yard', $features_array, true)) echo 'active'; ?>">Front yard</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Fenced yard', $features_array, true)) echo 'active'; ?>">Fenced yard</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Sprinklers', $features_array, true)) echo 'active'; ?>">Sprinklers</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Washer and dryer', $features_array, true)) echo 'active'; ?>">Washer and dryer</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Deck', $features_array, true)) echo 'active'; ?>">Deck</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Balcony', $features_array, true)) echo 'active'; ?>">Balcony</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Laundry', $features_array, true)) echo 'active'; ?>">Laundry</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Concierge', $features_array, true)) echo 'active'; ?>">Concierge</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Doorman', $features_array, true)) echo 'active'; ?>">Doorman</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Private space', $features_array, true)) echo 'active'; ?>">Private space</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Storage', $features_array, true)) echo 'active'; ?>">Storage</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Recreation', $features_array, true)) echo 'active'; ?>">Recreation</li>
+								<li class="col-sm-6 col-lg-4 <?php if(in_array('Roof Deck', $features_array, true)) echo 'active'; ?>">Roof Deck</li>
 							</ul>
 						</div>
 					</div>

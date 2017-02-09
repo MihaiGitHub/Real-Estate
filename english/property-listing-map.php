@@ -209,7 +209,7 @@ $result = $stmt->execute();
 									<div class="bathroom col-xs-4"><div class="value">2</div>bath</div>
 								</div>
 							</div>
-							<a href="property-details.php?id=222" class="btn more-link">More<?php echo 2222.urlencode($row['id']); ?></a>
+							<a href="property-details.php?id=<?php echo $row['id']; ?>" class="btn more-link">More</a>
 						</div>
 					</div>
 <?php } ?>
