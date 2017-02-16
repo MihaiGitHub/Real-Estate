@@ -413,9 +413,9 @@ jQuery(document).ready(function () {
 			jQuery('body').toggleClass('full-screen');
 		});
 	}
-
+/* might not need for photo gallery
 	if (jQuery.isFunction(jQuery.fn.isotope)) {
-		var mainContainer = jQuery(".image-main-box");
+		var mainContainer = jQuery(".image-main-box3");
 		mainContainer.isotope({
 			transitionDuration: "0.7s"
 		});
@@ -431,9 +431,9 @@ jQuery(document).ready(function () {
 			});
 		});
 	}
-
+*/
 	if (jQuery.isFunction(jQuery.fn.magnificPopup)) {
-		jQuery('.image-main-box:not(.portfolio)').magnificPopup({
+		jQuery('.image-main-boxx:not(.portfolio)').magnificPopup({
 			delegate:     '.more-details',
 			type:         'image',
 			removalDelay: 600,
