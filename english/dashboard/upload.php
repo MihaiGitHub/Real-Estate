@@ -13,8 +13,7 @@ if(!isset($_SESSION['pid'])){
     //$_SESSION['pid'] = $objDb->lastInsertId($result);
 }
 
-
-/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 //	if($result){
 		
 
@@ -43,9 +42,14 @@ if(!isset($_SESSION['pid'])){
 						&& in_array($file_extension, $validextensions)) {
 					if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {//if file moved to uploads folder
 					//	echo $j. ').<span id="noerror">Image uploaded successfully!.</span><br/><br/>';
-						
-						$stmt2 = $objDb->prepare('INSERT INTO properties_images (`pid`, `url`) VALUES (:pid, :url)');
-						$result2 = $stmt2->execute(array('pid' => $_SESSION['pid'], 'url' => $target_path));
+					
+						if(isset($_GET['type'])){
+							$stmt2 = $objDb->prepare('INSERT INTO properties_images (`pid`, `url`, `type`) VALUES (:pid, :url, :type)');
+							$result2 = $stmt2->execute(array('pid' => $_SESSION['pid'], 'url' => $target_path, 'type' => "floorplan"));
+						} else {
+							$stmt2 = $objDb->prepare('INSERT INTO properties_images (`pid`, `url`, `type`) VALUES (:pid, :url, :type)');
+							$result2 = $stmt2->execute(array('pid' => $_SESSION['pid'], 'url' => $target_path, 'type' => "gallery"));
+						}
 
                         if($result2){
                             echo 'success';

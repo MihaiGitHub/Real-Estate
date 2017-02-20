@@ -7,37 +7,8 @@ if(!$_SESSION['auth']){
 	exit;
 }
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-
-/*
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
-	exit;
-*/
+	
 	$address = $_POST['p-address'];
-/* old
-	// Get cURL resource
-	$curl = curl_init();
-	// Set some options - we are passing in a useragent too here
-	curl_setopt_array($curl, array(
-		CURLOPT_RETURNTRANSFER => 1,
-		CURLOPT_URL => 'https://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address),
-		CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-	));
-	// Send the request & save response to $resp
-	$resp = curl_exec($curl);
-	// Close request to clear up some resources
-	curl_close($curl);
-
-	$data = json_decode($resp, true);
-
-	include 'include/dbconnect.php';
-
-	$stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `description`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`) VALUES (:uid, :title, :description, :lat, :lng, :price, :bedrooms, :bathrooms)');
-	$result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'description' => $_POST['p-desc'], 'lat' => $data['results'][0]['geometry']['location']['lat'], 'lng' => $data['results'][0]['geometry']['location']['lng'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'],'bathrooms' => $_POST['p-bathroom']));
-	*/
-	///////////////////
 	
 	include 'include/dbconnect.php';
 
@@ -45,59 +16,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 $stmt = $objDb->prepare('INSERT INTO properties (`uid`, `title`, `property_status`, `property_type`, `description`, `features`, `lat`, `lng`, `price`, `bedrooms`, `bathrooms`, `garages`, `land_area`) VALUES (:uid, :title, :property_status, :property_type, :description, :features, :lat, :lng, :price, :bedrooms, :bathrooms, :garages, :land_area)');
 $result = $stmt->execute(array('uid' => $_SESSION['id'], 'title' => $_POST['p-title'], 'property_status' => $_POST['p-status'], 'property_type' => $_POST['p-type'], 'description' => $_POST['p-desc'], 'features' => implode(",",$_POST["features"]), 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'], 'bathrooms' => $_POST['p-bathroom'], 'garages' => $_POST['p-garage'], 'land_area' => $_POST['p-land']));
+
 	} else {
 
 $stmt = $objDb->prepare('UPDATE properties SET title = :title, property_status = :property_status, property_type = :property_type, description = :description, features = :features, lat = :lat, lng = :lng, price = :price, bedrooms = :bedrooms, bathrooms = :bathrooms, garages = :garages, land_area = :land_area WHERE id = :pid');
 $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' => $_POST['p-status'], 'property_type' => $_POST['p-type'], 'description' => $_POST['p-desc'], 'features' => implode(",",$_POST["features"]), 'lat' => $_POST['p-lat'], 'lng' => $_POST['p-long'], 'price' => $_POST['p-price'], 'bedrooms' => $_POST['p-bedroom'], 'bathrooms' => $_POST['p-bathroom'], 'garages' => $_POST['p-garage'],'land_area' => $_POST['p-land'],  'pid' => $_SESSION['pid']));
 
 	}
-//////////////////////////
 	
 	if($result){
-		/*
+
 		$pid = $objDb->lastInsertId($result);
-
-		//////////////////////////////////////////////////////////////////////////////////////////////////////
-		$j = 0; //Variable for indexing uploaded image 
-
-		if (!is_dir('uploads/'.$_SESSION['id'].'/'.$pid)) {
-			mkdir('uploads/'.$_SESSION['id'].'/'.$pid, 0777, true);
-		}
 		
-		$target_path = "uploads/".$_SESSION['id']."/".$pid."/"; //Declaring Path for uploaded images
-
-		for ($i = 0; $i < count($_FILES['file']['name']); $i++) {//loop to get individual element from the array
-
-			$validextensions = array("JPG", "JPEG", "PNG", "jpeg", "jpg", "png");  //Extensions which are allowed
-			$ext = explode('.', basename($_FILES['file']['name'][$i]));//explode file name from dot(.) 
-			$file_extension = end($ext); //store extensions in the variable
-			
-			$target_path = $target_path . md5(uniqid()) . "." . $ext[count($ext) - 1];//set the target path with a new name of image
-			$j = $j + 1;//increment the number of uploaded images according to the files in array
+		for($i = 0; $i < count($_POST['neighborhood']); $i++){
+			if(isset($_POST['neighborhood'][$i]['place']) && $_POST['neighborhood'][$i]['place'] != ''){
+				
+				$stmtNeigh = $objDb->prepare('INSERT INTO properties_neighborhoods (`pid`, `place`, `distance`, `distance_by`) VALUES (:pid, :place, :distance, :distanceby)');
+				$resultNeigh = $stmtNeigh->execute(array('pid' => $pid, 'place' => $_POST['neighborhood'][$i]['place'], 'distance' => $_POST['neighborhood'][$i+1]['distance'], 'distanceby' => $_POST['neighborhood'][$i+2]['by']));
 		
-			if (($_FILES["file"]["size"][$i] < 6000000) //Approx. 100kb files can be uploaded.
-						&& in_array($file_extension, $validextensions)) {
-					if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $target_path)) {//if file moved to uploads folder
-					//	echo $j. ').<span id="noerror">Image uploaded successfully!.</span><br/><br/>';
-						
-						$stmt2 = $objDb->prepare('INSERT INTO properties_images (`pid`, `url`) VALUES (:pid, :url)');
-						$result2 = $stmt2->execute(array('pid' => $pid, 'url' => $target_path));
-					} else {//if file was not moved.
-		//				echo $j. '2).<span id="error">please try again!.</span><br/><br/>';
-					}
-				} else {//if file size and file type was incorrect.
-		//			echo $j. ').<span id="error">***Invalid file Size or Type***</span><br/><br/>';
-				}
+			}
 		}
-		*/
-
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		header("Location:index.php");
 		exit;
 	}
-
-
 }
 ?>
 <body class="submit-property">
@@ -270,7 +212,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 											Gym
 										</label
 
-									</li>
+									></li>
 									<li class="col-xs-6 col-sm-4 hsq-checkbox">
 										<label for="p-f-7">
 											<input type="checkbox" value="Pound" id="p-f-7" name="features[]">
@@ -442,20 +384,43 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 					</div>
 					<div class="information-box">
 						<h3>Neighborhood <i class="fa fa-info"></i></h3>
+						
 						<div class="box-content">
 							<div class="neighborhood-container">
 								<div class="neighborhood-row clearfix" id="neighborhood-pattern">
 									<div class="col-xs-4 place-container">
-										<input type="text" name="neighborhood[]['place']" class="p-neighbor-place" placeholder="Add a place">
+									
+									
+									<input type="text" name="neighborhood[][place]" class="p-neighbor-place" placeholder="Add a place">
+		
+									<!--
+									<input type="text" name="neighborhood[]['place']" class="p-neighbor-place" placeholder="Add a place">
+									<!--
+										<input type="text" name="neighborhood_place" class="p-neighbor-place" placeholder="Add a place">
+									-->
 									</div>
 									<div class="col-xs-3 distance-container">
 										<div class="input-group r-icon">
-											<input type="text" name="neighborhood[]['distance']" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+										
+											<input type="text" name="neighborhood[][distance]" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+
+<!--
+											<input type="text" name="neighborhood_distance" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+											-->
+											
+											
+											
 											<span class="input-group-addon">min</span>
 										</div>
 									</div>
 									<div class="col-xs-5 btn-container">
-										<input type="hidden" class="neighbor-by" name="neighborhood[]['by']">
+									
+										<input type="hidden" class="neighbor-by" name="neighborhood[][by]">
+									<!--
+									<input type="hidden" class="neighbor-by" name="neighborhood[0]['by']">
+									<!--
+										<input type="hidden" class="neighbor-by" name="neighborhood_by">
+									-->
 										<div class="btn-group" role="group">
 											<button type="button" class="btn" data-value="1"><i class="fa fa-bicycle"></i></button>
 											<button type="button" class="btn" data-value="2"><i class="fa fa-train"></i></button>
@@ -466,16 +431,33 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 								</div>
 								<div class="neighborhood-row clearfix">
 									<div class="col-xs-4 place-container">
-										<input type="text" name="neighborhood[]['place']" class="p-neighbor-place" placeholder="Add a place">
+									<!--
+										<input type="text" name="neighborhood_place2" class="p-neighbor-place" placeholder="Add a place2222">
+									
+										
+										<input type="text" name="neighborhood[1]['place']" class="p-neighbor-place" placeholder="Add a place">
+										-->
+										<input type="text" name="neighborhood[][place]" class="p-neighbor-place" placeholder="Add a place">
+
 									</div>
 									<div class="col-xs-3 distance-container">
 										<div class="input-group r-icon">
-											<input type="text" name="neighborhood[]['distance']" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+										<!--
+										<input type="text" name="neighborhood_distance2" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+										-->
+										
+											<input type="text" name="neighborhood[][distance]" class="form-control number-field" placeholder="ex: 3" class="p-neighbor-distance">
+										
+											
 											<span class="input-group-addon">min</span>
 										</div>
 									</div>
 									<div class="col-xs-5 btn-container">
-										<input type="hidden" class="neighbor-by" name="neighborhood[]['by']">
+									<!--
+										<input type="hidden" class="neighbor-by" name="neighborhood_by2">
+										-->
+										<input type="hidden" class="neighbor-by" name="neighborhood[][by]">
+										
 										<div class="btn-group" role="group">
 											<button type="button" class="btn" data-value="1"><i class="fa fa-bicycle"></i></button>
 											<button type="button" class="btn" data-value="2"><i class="fa fa-train"></i></button>
@@ -592,7 +574,7 @@ $result = $stmt->execute(array('title' => $_POST['p-title'], 'property_status' =
 			previewNode.parentNode.removeChild(previewNode);
 
 			jQuery('#floorplan-uploader').dropzone({
-				url: "upload.php",
+				url: "upload.php?type=floorplan",
 				thumbnailWidth: 105,
 				thumbnailHeight: 105,
 				maxFilesize: 5,
